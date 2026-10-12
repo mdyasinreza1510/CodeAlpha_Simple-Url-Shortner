@@ -1,4 +1,5 @@
 const express=require('express')
+const urlcontroller=require("../controllers/url.controller")
 
 
 
@@ -6,4 +7,10 @@ const express=require('express')
 
 const router=express.Router();
 
-router.post("/uploadUrl",)
+router.post("/uploadUrl",urlcontroller.crateshorturl)
+
+router.get("/:shorturl",urlcontroller.getshorturl)
+
+
+
+module.exports=router;

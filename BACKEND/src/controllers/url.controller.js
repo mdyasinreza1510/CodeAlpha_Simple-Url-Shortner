@@ -9,13 +9,48 @@ async function crateshorturl(req, res) {
 
         const url = await urlModel.create({
             originalurl,
-            shorturl: `http://localhost:3000/${shorturl}`,
-            data: url
+            shorturl
+   
         });
         res.status(201).json({
-            messege: "short url created sucessfully"
+            messege: "short url created sucessfully",
+            shorturl:`http://localhost:3000/${shorturl}`
+        
+        })
+    } catch (err){
+        console.log(err);
+
+        res.status(500).json({
+            messege:err.messege,
         })
     }
  
 
 }
+
+
+async function getshorturl(req,res){
+
+    try{
+
+           const {shorturl}= req.params;
+    const url= await urlModel.findOne({
+        shorturl:shorturl,
+    })
+
+    if(!url){
+        return res.status(404).json({
+            messege:"URL NOT FOUND"
+        })
+    }
+    return res.redirect(url.originalurl) 
+    
+}catch(err){
+     return res.status(500).json({
+      message: err.message,
+    });
+}
+
+}
+
+module.exports={crateshorturl, getshorturl}

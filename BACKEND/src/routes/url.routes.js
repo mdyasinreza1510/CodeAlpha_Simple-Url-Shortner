@@ -12,5 +12,6 @@ router.post("/uploadUrl",urlcontroller.crateshorturl)
 router.get("/:shorturl",urlcontroller.getshorturl)
 
 
+//diect route:- http://localhost:3000/api/url/{shorturl }
 
 module.exports=router;
